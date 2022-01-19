@@ -24,21 +24,19 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("controller"))
-                .paths(PathSelectors.any())
+                .paths(PathSelectors.ant("/api/**"))
                 .build()
                 .securitySchemes(Arrays.asList(apiKey()));
     }
-
     private ApiKey apiKey() { return new ApiKey("Authorization", "Authorization", "header");}
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("Beginner_Example_API_Document")
-                .description("API 설명")
+                .title("BCSD_Beginner Project Community API")
+                .description("회원가입 API\n게시판 API")
                 .version("1.0.0")
                 .build();
     }
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
@@ -47,5 +45,4 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
-
 }

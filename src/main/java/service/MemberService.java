@@ -1,11 +1,12 @@
 package service;
 
-import domain.Member;
+import domain.dto.MemberDto;
 import response.BaseResponse;
-import java.util.Map;
 
 public interface MemberService {
-    BaseResponse join(Member member) throws Exception;
+    BaseResponse join(MemberDto member) throws Exception;
+
+    MemberDto getMember(String uid);
 
 //    Map<String, Object> checkKey(String key) throws Exception;
 //

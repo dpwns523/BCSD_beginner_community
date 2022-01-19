@@ -1,8 +1,12 @@
-package domain;
+package domain.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
-public class Member {
+/*
+    TODO : Lombok 어노테이션을 활용한 코드 간소화 업데이트
+ */
+public class MemberEntity {
     private Long uid;
     private String name;
     private String password;
@@ -14,8 +18,21 @@ public class Member {
     private boolean isDeleted;
     private Timestamp created_at;
     private Timestamp updated_at;
-
+    // 비밀번호 암호화
     protected String salt;
+
+    public MemberEntity(String name, String password, String nickName, String email, String phoneNumber, int age, int sex){
+        this.name= name;
+        this.password = password;
+        this.nickName = nickName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.age = age;
+        this.sex = sex;
+        this.isDeleted = false;
+        this.created_at = Timestamp.valueOf(LocalDateTime.now());
+        this.updated_at = Timestamp.valueOf(LocalDateTime.now());
+    }
 
     public void setUid(Long uid) {
         this.uid = uid;

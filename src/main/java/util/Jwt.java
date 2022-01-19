@@ -1,10 +1,5 @@
 //package util;
-//
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.sun.xml.internal.messaging.saaj.util.Base64;
-//import java.util.Base64;
-//import domain.Member;
-//import io.jsonwebtoken.Claims;
+//import domain.dto.MemberDto;
 //import io.jsonwebtoken.Jwts;
 //import io.jsonwebtoken.SignatureAlgorithm;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +13,14 @@
 //
 //@Service
 //public class Jwt {
-//    @Value("${token.key}")
+//    @Value("${jwt.secret}")
 //    private String SECRET_KEY;  // TODO: Key는 하드코딩 하지말고 외부에서 가져오는것을 권장
 //
 //    @Autowired
 //    private MemberMapper memberMapper;
 //
 //    //토큰 생성
-//    public String createToken(Member member) {
+//    public String createToken(MemberDto member) {
 //        //Header 부분 설정
 //        Map<String, Object> headers = new HashMap<>();
 //        headers.put("typ", "JWT");

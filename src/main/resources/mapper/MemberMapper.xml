@@ -6,10 +6,16 @@
 <mapper namespace="repository.MemberMapper">
 
     <insert id = "join">
-        INSERT INTO members('name', 'password', 'nickName', 'email',age,sex,'phoneNumber')
-        VALUES (#{member.name}, #{member.password}, #{member.nickName}, #{member.email},
-                #{member.age}, #{member.sex},#{member.phoneNumber})
+        INSERT INTO 'members'('name', 'password', 'nickName', 'email',age,sex,'phoneNumber','isDeleted','created_at','updated_at','salt')
+        VALUES (#{memberEntity.name}, #{memberEntity.password}, #{memberEntity.nickName}, #{memberEntity.email},
+                #{memberEntity.age}, #{memberEntity.sex},#{memberEntity.phoneNumber},
+                #{memberEntity.isDeleted},#{memberEntity.created_at},#{memberEntity.updated_at},#{memberEntity.salt})
     </insert>
+    <update id="setSalt">
+        UPDATE `account`
+        SET `salt` = #{salt}
+        WHERE `uid` = #{uid}
+    </update>
 
 
 </mapper>

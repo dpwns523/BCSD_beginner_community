@@ -1,11 +1,12 @@
 package repository;
 
-import domain.Member;
+import domain.dto.MemberDto;
+import domain.entity.MemberEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberMapper {
-    void join(Member member);
+    void join(MemberEntity member);
 
     void setAge(Long uid, int age);
 
@@ -19,7 +20,7 @@ public interface MemberMapper {
 
     short getUserNumToNickName(String nickname);
 
-    Member getUserToEmail(String email);
+    MemberDto getUserToEmail(String email);
 
     String getSaltToUid(Long uid);
 
@@ -28,5 +29,4 @@ public interface MemberMapper {
     String getPasswordToEmail(String email);
 
     void setSalt(Long uid, String salt);
-
 }
