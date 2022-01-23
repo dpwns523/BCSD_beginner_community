@@ -1,32 +1,48 @@
 package repository;
 
 import domain.dto.MemberDto;
-import domain.entity.MemberEntity;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberMapper {
-    void join(MemberEntity member);
+    /*
+        회원가입
+     */
+    void join(@Param(value = "memberDto") MemberDto memberDto);
+    /*
+        회원가입 시 중복 체크
+     */
+    boolean checkExistEmail(@Param(value = "email") String email);
+    boolean checkExistNickName(@Param(value ="nick_name")String nick_name);
+    /*
+        로그인 시 세션 관리
+     */
 
-    void setAge(Long uid, int age);
+    /*
 
-    void setSex(Long uid, int sex);
+     */
 
-    void setPhone(Long uid, String phone_number);
-
-    void setAddress(Long uid, String address);
-
-    short getUserNumToEmail(String email);
-
-    short getUserNumToNickName(String nickname);
-
-    MemberDto getUserToEmail(String email);
-
-    String getSaltToUid(Long uid);
-
-    Long getUidToEmail(String email);
-
-    String getPasswordToEmail(String email);
-
-    void setSalt(Long uid, String salt);
+    //
+//    void setAge(Long uid, int age);
+//
+//    void setSex(Long uid, int sex);
+//
+//    void setPhone(Long uid, String phone_number);
+//
+//    void setAddress(Long uid, String address);
+//
+//    short getUserNumToEmail(String email);
+//
+//    short getUserNumToNickName(String nickname);
+//
+//    MemberDto getUserToEmail(String email);
+//
+//    String getSaltToUid(Long uid);
+//
+//    Long getUidToEmail(String email);
+//
+//    String getPasswordToEmail(String email);
+//
+//    void setSalt(Long uid, String salt);
 }

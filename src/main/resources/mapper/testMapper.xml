@@ -6,4 +6,9 @@
     <select id="getTime" resultType="string">
         select now()
     </select>
+
+    <insert id="test">
+        INSERT INTO `test`(`name`, `password`)
+        VALUES (#{testDto.name}, #{testDto.password})
+    </insert>
 </mapper>

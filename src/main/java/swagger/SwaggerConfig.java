@@ -24,7 +24,7 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("controller"))
-                .paths(PathSelectors.ant("/api/**"))
+                .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(Arrays.asList(apiKey()));
     }

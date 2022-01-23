@@ -12,7 +12,7 @@ CREATE TABLE `COMMUNITY`.`MEMBERS`(
                                     `deleted` BOOLEAN NOT NULL DEFAULT FALSE,
                                     `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
                                     `created_at` TIMESTAMP NOT NULL DEFAULT NOW(),
-                                    `salt` VARCHAR(50),
+--                                     `salt` VARCHAR(50),
                                     PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8

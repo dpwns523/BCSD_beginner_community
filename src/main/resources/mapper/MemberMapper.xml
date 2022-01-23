@@ -2,20 +2,28 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="repository.MemberMapper">
+    <resultMap id="Member" type="domain.dto.MemberDto">
+        <result property="uid" column="uid"/>
 
+    </resultMap>
     <insert id = "join">
-        INSERT INTO 'members'('name', 'password', 'nickName', 'email',age,sex,'phoneNumber','isDeleted','created_at','updated_at','salt')
-        VALUES (#{memberEntity.name}, #{memberEntity.password}, #{memberEntity.nickName}, #{memberEntity.email},
-                #{memberEntity.age}, #{memberEntity.sex},#{memberEntity.phoneNumber},
-                #{memberEntity.isDeleted},#{memberEntity.created_at},#{memberEntity.updated_at},#{memberEntity.salt})
+        INSERT INTO `members`(`name`, `password`, `email`, `nick_name`, `phone_number`, age, sex)
+        VALUES (#{memberDto.name}, #{memberDto.password}, #{memberDto.email}, #{memberDto.nick_name},
+                #{memberDto.phone_number}, #{memberDto.age}, #{memberDto.sex})
     </insert>
-    <update id="setSalt">
-        UPDATE `account`
-        SET `salt` = #{salt}
-        WHERE `uid` = #{uid}
-    </update>
-
+    <select id="checkExistEmail" resultType="Boolean">
+        SELECT EXISTS(
+                        SELECT `id`
+                        FROM `members`
+                        WHERE `email` = #{email});
+    </select>
+    <select id="checkExistNickName" resultType="Boolean">
+        SELECT EXISTS(
+                       SELECT `id`
+                       FROM `members`
+                       WHERE `nick_name` = #{nick_name});
+    </select>
 
 </mapper>
+
