@@ -4,6 +4,8 @@ import domain.dto.MemberDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+
 @Repository
 public interface MemberMapper {
     /*
@@ -18,6 +20,9 @@ public interface MemberMapper {
     /*
         로그인 시 세션 관리
      */
+    MemberDto getUserInfoToEmail(@Param(value="email") String email);
+    MemberDto getUserInfoToSession(@Param(value = "session")String session);
+    void setSession(@Param(value="session_key") String sessionKey, @Param(value="limitDate") Date sessionLimit, @Param(value="email") String email);
 
     /*
 

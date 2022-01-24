@@ -12,6 +12,8 @@ CREATE TABLE `COMMUNITY`.`MEMBERS`(
                                     `deleted` BOOLEAN NOT NULL DEFAULT FALSE,
                                     `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
                                     `created_at` TIMESTAMP NOT NULL DEFAULT NOW(),
+                                    `session_key` VARCHAR(50) NOT NULL DEFAULT 'none',
+                                    `session_limit` TIMESTAMP,
 --                                     `salt` VARCHAR(50),
                                     PRIMARY KEY (`id`))
 ENGINE = InnoDB

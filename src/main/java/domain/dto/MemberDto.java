@@ -50,11 +50,18 @@ public class MemberDto {
     private String phone_number;
 
     @ApiModelProperty(hidden = true)
+    private Long id;
+    @ApiModelProperty(hidden = true)
     private boolean deleted;
     @ApiModelProperty(hidden = true)
     private Timestamp created_at;
     @ApiModelProperty(hidden = true)
     private Timestamp updated_at;
+    @ApiModelProperty(hidden = true)
+    private String session_key;
+    @ApiModelProperty(hidden = true)
+    private Timestamp session_limit;
+
 //    @ApiModelProperty(hidden = true)
 //    private String salt;
 
