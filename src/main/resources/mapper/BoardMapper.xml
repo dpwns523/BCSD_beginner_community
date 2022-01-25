@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="repository.BoardMapper">
+
+    <insert id="createBoard">
+        INSERT INTO `boards`(`member_id`, `title`, `nick_name`, `email`, `contents`)
+        VALUES (#{boardDto.memberId}, #{boardDto.title}, #{nick_name}, #{boardDto.email},
+                #{boardDto.contents})
+    </insert>
+
+    <select id="getBoard">
+        SELECT *
+        FROM `boards`
+        WHERE `id` = #{id};
+    </select>
+    
+    <update id="updateBoard">
+        UPDATE `boards`
+        SET title = #{boardDto.title},
+            cotents = #{boardDto.contents}
+        WHERE `id` = #{boardDto.id};
+    </update>
+    <delete id="deleteBoard">
+        DELETE
+        FROM boards
+        WHERE `id` = #{boardId};
+    </delete>
+
+</mapper>

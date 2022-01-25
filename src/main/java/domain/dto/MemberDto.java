@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.*;
 import java.sql.Timestamp;
@@ -12,6 +13,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor  // 굳이 필요한지는 모르겠지만 기본 생성자는 있어야할 것 같은?
+@ToString
 public class MemberDto {
 
     @NotNull(groups={ValidationGroups.join.class}, message = "이름을 입력하세요.")

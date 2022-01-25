@@ -27,6 +27,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             MemberDto memberDto =memberMapper.getUserInfoToSession(loginCookie.getValue());
             if(memberDto != null) httpSession.setAttribute("login", memberDto);
         }
+        System.out.println("AuthInterceptor 작동");
+
         return true;
     }
 }

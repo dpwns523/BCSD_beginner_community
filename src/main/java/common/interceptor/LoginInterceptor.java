@@ -25,6 +25,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession httpSession = request.getSession();
+        System.out.println("LoginInterceptor preHandle 작동");
         // 기존의 로그인 정보 제거
         if(httpSession.getAttribute(LOGIN) != null) httpSession.removeAttribute(LOGIN);
         return true;
@@ -51,5 +52,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 response.addCookie(loginCookie);
             }
         }
+        System.out.println("LoginInterceptor postHandle 작동");
+
     }
 }

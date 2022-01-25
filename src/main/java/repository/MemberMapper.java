@@ -25,29 +25,8 @@ public interface MemberMapper {
     void setSession(@Param(value="session_key") String sessionKey, @Param(value="limitDate") Date sessionLimit, @Param(value="email") String email);
 
     /*
-
+        회원 정보 수정
      */
 
-    //
-//    void setAge(Long uid, int age);
-//
-//    void setSex(Long uid, int sex);
-//
-//    void setPhone(Long uid, String phone_number);
-//
-//    void setAddress(Long uid, String address);
-//
-//    short getUserNumToEmail(String email);
-//
-//    short getUserNumToNickName(String nickname);
-//
-//    MemberDto getUserToEmail(String email);
-//
-//    String getSaltToUid(Long uid);
-//
-//    Long getUidToEmail(String email);
-//
-//    String getPasswordToEmail(String email);
-//
-//    void setSalt(Long uid, String salt);
+
 }
