@@ -56,18 +56,16 @@ public class MemberController {
     @ApiOperation(value="로그아웃", notes = "로그아웃 및 세션 쿠키 삭제")
     public ResponseEntity logout(HttpSession httpSession)throws Exception{
         MemberDto memberDto = authService.authMember();
-        if(memberDto != null){
-            System.out.println("logout {"+memberDto+"}");
-            httpSession.removeAttribute("login");
-            httpSession.invalidate();
-            // TODO: 자동 로그인 구현 시 쿠키 활용
-//            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-//            if(loginCookie != null){
-//                loginCookie.setMaxAge(0);
-//                response.addCookie(loginCookie);
-//                memberService.keepLogin(memberDto.getEmail(), "none", new Date());
-//            }
-        }
+        System.out.println("logout {"+memberDto+"}");
+        httpSession.removeAttribute("login");
+        httpSession.invalidate();
+//        TODO: 자동 로그인 구현 시 쿠키 활용
+//        Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+//        if(loginCookie != null){
+//            loginCookie.setMaxAge(0);
+//            response.addCookie(loginCookie);
+//            memberService.keepLogin(memberDto.getEmail(), "none", new Date());
+//        }
         return new ResponseEntity(new BaseResponse("로그아웃 및 세션 삭제", HttpStatus.OK), HttpStatus.OK);
     }
 

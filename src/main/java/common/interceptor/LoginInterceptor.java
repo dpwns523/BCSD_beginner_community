@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-
+/*
+    로그인 시 쿠키 생성 - 미구현
+ */
 @Component
 public class LoginInterceptor extends HandlerInterceptorAdapter {
     private static final String LOGIN = "login";

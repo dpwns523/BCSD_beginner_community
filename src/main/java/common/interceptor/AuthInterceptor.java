@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 /*
-   쿠키를 활용한 권한 체크
+   쿠키를 활용한 권한 체크 -미구현
  */
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 

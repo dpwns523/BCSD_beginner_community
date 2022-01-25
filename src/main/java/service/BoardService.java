@@ -6,7 +6,7 @@ import response.BaseResponse;
 import javax.servlet.http.HttpServletRequest;
 
 public interface BoardService {
-    BaseResponse createBoard(BoardDto board, HttpServletRequest request) throws Exception;
+    BaseResponse createBoard(BoardDto board) throws Exception;
 
 //    List<BoardDto> getSummaryBoardList(BoardSearchModel board) throws Exception;
 

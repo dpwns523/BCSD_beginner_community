@@ -9,4 +9,5 @@ public final class ValidationGroups {
     private ValidationGroups() {}
 
     public interface join extends Default {};
+    public interface createBoard extends Default {};
 }

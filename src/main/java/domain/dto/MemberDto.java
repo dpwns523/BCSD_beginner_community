@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
-@NoArgsConstructor  // 굳이 필요한지는 모르겠지만 기본 생성자는 있어야할 것 같은?
+@NoArgsConstructor
 @ToString
 public class MemberDto {
 
