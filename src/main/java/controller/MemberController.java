@@ -68,5 +68,8 @@ public class MemberController {
 //        }
         return new ResponseEntity(new BaseResponse("로그아웃 및 세션 삭제", HttpStatus.OK), HttpStatus.OK);
     }
+/*
+    회원탈퇴, 회원수정, 회원정보
+ */
 
 }

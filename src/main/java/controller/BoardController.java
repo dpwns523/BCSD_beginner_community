@@ -22,7 +22,28 @@ public class BoardController {
 
     @RequestMapping(value="",method = RequestMethod.POST)
     @ApiOperation(value = "게시글 작성", notes = "게시글 작성 API")
-    public ResponseEntity create(@RequestBody @Validated(ValidationGroups.createBoard.class) BoardDto boardDto) throws Exception{
+    public ResponseEntity createBoard(@RequestBody @Validated(ValidationGroups.board.class) BoardDto boardDto) throws Exception{
         return new ResponseEntity(boardService.createBoard(boardDto), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    @ApiOperation(value = "게시글 보기", notes = "게시글 보기 API")
+    public ResponseEntity getBoard(Long boardId) throws Exception{
+        return new ResponseEntity(boardService.getBoard(boardId),HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "",method = RequestMethod.PUT)
+    @ApiOperation(value = "게시글 수정", notes = "게시글 수정 API")
+    public ResponseEntity updateBoard(Long boardId, String title, String contents) throws Exception{
+        return new ResponseEntity(boardService.updateBoard(boardId,title,contents), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.DELETE)
+    @ApiOperation(value = "게시글 삭제", notes = "게시글 삭제 API")
+    public ResponseEntity deleteBoard(@RequestBody Long boardId) throws Exception{
+        return new ResponseEntity(boardService.deleteBoard(boardId),HttpStatus.OK);
+    }
+    /*
+        게시글 목록 불러오기 -페이징
+     */
 }

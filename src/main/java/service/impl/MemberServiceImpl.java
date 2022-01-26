@@ -20,12 +20,9 @@ import java.util.Date;
 @Service
 public class MemberServiceImpl implements MemberService {
 
+    @Autowired
     private MemberMapper memberMapper;
 
-    @Autowired
-    public MemberServiceImpl(MemberMapper memberMapper) {
-        this.memberMapper = memberMapper;
-    }
 
     @Override
     public BaseResponse join(MemberDto memberDto) throws MyException{

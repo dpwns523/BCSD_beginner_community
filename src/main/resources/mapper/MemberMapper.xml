@@ -16,9 +16,6 @@
         <result property="deleted" column="deleted"/>
         <result property="updated_at" column="updated_at"/>
         <result property="created_at" column="created_at"/>
-        <result property="created_at" column="created_at"/>
-        <result property="created_at" column="created_at"/>
-
     </resultMap>
 
     <insert id = "join">

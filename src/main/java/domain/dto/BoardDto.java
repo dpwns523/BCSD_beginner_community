@@ -15,23 +15,33 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardDto {
-/*
-    board_hit - 조회수
-    comments - 댓글 수 추가
- */
-    @NotNull(groups={ValidationGroups.createBoard.class}, message = "제목을 입력하세요.")
+    /*
+        board_hit - 조회수
+        comments - 댓글 수 추가
+     */
+    @NotNull(groups={ValidationGroups.board.class}, message = "제목을 입력하세요.")
     private String title;
-    @NotNull(groups={ValidationGroups.createBoard.class}, message = "내용을 입력하세요.")
+    @NotNull(groups={ValidationGroups.board.class}, message = "내용을 입력하세요.")
     private String contents;
     @ApiModelProperty(hidden = true)
     private Long id;
     @ApiModelProperty(hidden = true)
-    private String nickName;
+    private String nick_name;
     @ApiModelProperty(hidden = true)
-    private Long memberId;
+    private Long member_id;
     @ApiModelProperty(hidden = true)
-    private Timestamp createdAt;
+    private Timestamp created_at;
     @ApiModelProperty(hidden = true)
-    private Timestamp updatedAt;
+    private Timestamp updated_at;
 
+    @Override
+    public String toString() {
+        return "{ name : "+
+                nick_name+
+                " title : "
+                +title
+                +" contents : "
+                +contents
+                +"}";
+    }
 }

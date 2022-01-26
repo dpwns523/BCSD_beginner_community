@@ -12,8 +12,6 @@ import response.BaseResponse;
 import service.AuthService;
 import service.BoardService;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Service
 public class BoardServiceImpl implements BoardService {
 
@@ -33,23 +31,29 @@ public class BoardServiceImpl implements BoardService {
 
     // 게시글 열람
     @Override
-    public BoardDto getBoard(Long boardId) throws MyException {
-        BoardDto boardDto = boardMapper.getBoard(boardId);
-        if(boardDto == null) throw new MyException(Constants.ExceptionClass.BOARD, HttpStatus.BAD_REQUEST, "존재하지 않는 게시물");
-        return boardDto;
+    public BaseResponse getBoard(Long boardId) throws MyException {
+        BoardDto boardDto = boardMapper.getBoardToId(boardId);
+        if(boardDto == null) throw new MyException(Constants.ExceptionClass.BOARD, HttpStatus.BAD_REQUEST, "존재하지 않는 게시물입니다.");
+        return new BaseResponse(boardDto.toString(),HttpStatus.OK);
     }
 
     @Override
-    public BaseResponse updateBoard(BoardDto boardDto, HttpServletRequest request) throws MyException {
+    public BaseResponse updateBoard(Long boardId, String title, String contents) throws MyException {
         MemberDto memberDto = authService.authMember();
-        if(memberDto.getNick_name() != boardDto.getNickName()) throw new MyException(Constants.ExceptionClass.BOARD, HttpStatus.BAD_REQUEST, "작성자만 수정할 수 있습니다.");
-        boardMapper.updateBoard(boardDto);
-        return new BaseResponse("수정 되었습니다.",HttpStatus.OK);
+        BoardDto boardDto = boardMapper.getBoardToId(boardId);
+        System.out.println(memberDto.getNick_name() + boardDto.getNick_name());
+        if(!memberDto.getNick_name().equals(boardDto.getNick_name())) throw new MyException(Constants.ExceptionClass.BOARD, HttpStatus.BAD_REQUEST, "작성자만 수정할 수 있습니다.");
+        boardMapper.updateBoard(boardId, title, contents);
+        return new BaseResponse("게시글이 수정 되었습니다.",HttpStatus.OK);
     }
 
     @Override
-    public BaseResponse deleteBoard(Long id) throws Exception {
-        return null;
+    public BaseResponse deleteBoard(Long boardId) throws MyException {
+        MemberDto memberDto = authService.authMember();
+        BoardDto boardDto = boardMapper.getBoardToId(boardId);
+        if(!memberDto.getNick_name().equals(boardDto.getNick_name())) throw new MyException(Constants.ExceptionClass.BOARD, HttpStatus.BAD_REQUEST, "작성자만 삭제할 수 있습니다.");
+        boardMapper.deleteBoard(boardId);
+        return new BaseResponse("게시글이 삭제 되었습니다.", HttpStatus.OK);
     }
 
 }

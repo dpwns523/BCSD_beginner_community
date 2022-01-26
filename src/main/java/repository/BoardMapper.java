@@ -3,7 +3,6 @@ package repository;
 import domain.dto.BoardDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import response.BaseResponse;
 
 @Repository
 public interface BoardMapper {
@@ -11,8 +10,10 @@ public interface BoardMapper {
         게시글 CRUD
      */
     void createBoard(@Param(value="member_id") Long id, @Param(value="nick_name")String nickName, @Param(value = "boardDto") BoardDto boardDto);
-    BoardDto getBoard(@Param(value="id")Long boardId);
-    BaseResponse updateBoard(@Param("boardDto")BoardDto boardDto);
-    BaseResponse deleteBoard(@Param("boardId")Long boardId);
+    BoardDto getBoardToId(@Param(value="id")Long boardId);
+    void updateBoard(@Param(value = "id")Long id, @Param(value="title")String title,@Param(value="contents")String contents);
+    void deleteBoard(@Param(value = "id")Long boardId);
+
+
 
 }

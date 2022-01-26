@@ -12,10 +12,20 @@ CREATE TABLE `COMMUNITY`.`MEMBERS`(
                                     `deleted` BOOLEAN NOT NULL DEFAULT FALSE,
                                     `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
                                     `created_at` TIMESTAMP NOT NULL DEFAULT NOW(),
-                                    `session_key` VARCHAR(50) NOT NULL DEFAULT 'none',
-                                    `session_limit` TIMESTAMP,
---                                     `salt` VARCHAR(50),
                                     PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin;
+
+-- Test용 데이터
+INSERT INTO `members`(`name`, `password`, `email`, `nick_name`, `phone_number`, age, sex)
+VALUES ("임예준", "password", "dpwns523@naver.com", "창조1",
+        "01066040868",25, 1);
+INSERT INTO `members`(`name`, `password`, `email`, `nick_name`, `phone_number`, age, sex)
+VALUES ("임예준", "password", "dpwns523@daum.net", "창조2",
+        "01066040868",25, 1);
+INSERT INTO `members`(`name`, `password`, `email`, `nick_name`, `phone_number`, age, sex)
+VALUES ("임예준", "password", "dpwns523@koreatech.ac.kr", "창조3",
+        "01066040868",25, 1);
+
+

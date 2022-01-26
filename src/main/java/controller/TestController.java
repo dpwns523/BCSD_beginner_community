@@ -39,13 +39,10 @@ public class TestController {
         System.out.println(testMapper.getTime());
         return "hello";
     }
-
     //Mapper Test
     @RequestMapping(value="test", method = RequestMethod.POST)
     @ApiOperation(value="Mapper Test", notes ="DB Test")
     public ResponseEntity test(@RequestBody TestDto testDto)throws Exception{
         return new ResponseEntity((testService.test(testDto)), HttpStatus.OK);
     }
-
-
 }

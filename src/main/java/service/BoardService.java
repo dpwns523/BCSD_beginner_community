@@ -3,16 +3,14 @@ package service;
 import domain.dto.BoardDto;
 import response.BaseResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 public interface BoardService {
     BaseResponse createBoard(BoardDto board) throws Exception;
 
 //    List<BoardDto> getSummaryBoardList(BoardSearchModel board) throws Exception;
 
-    BoardDto getBoard(Long boardId) throws Exception;
+    BaseResponse getBoard(Long boardId) throws Exception;
 
-    BaseResponse updateBoard(BoardDto boardDto, HttpServletRequest request) throws Exception;
+    BaseResponse updateBoard(Long boardId, String title, String contents) throws Exception;
 
     BaseResponse deleteBoard(Long id) throws Exception;
 

@@ -2,7 +2,7 @@ package common;
 
 public class Constants {
     public enum ExceptionClass{
-        MEMBER("Member"), JOIN("Join"), BOARD("Board");
+        MEMBER("Member"), JOIN("Join"), BOARD("Board"), COMMENT("Comment");
 
         private String exceptionClass;
 
