@@ -24,4 +24,11 @@ public class AuthServiceImpl implements AuthService {
             throw new MyException(Constants.ExceptionClass.MEMBER, HttpStatus.BAD_REQUEST, "로그인이 필요합니다.");
         return (MemberDto)object;
     }
+
+    @Override
+    public Object checkLogin() throws MyException {
+        HttpSession httpSession = request.getSession();
+        return httpSession.getAttribute("login");
+    }
+
 }

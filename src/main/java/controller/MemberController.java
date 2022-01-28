@@ -71,5 +71,22 @@ public class MemberController {
 /*
     회원탈퇴, 회원수정, 회원정보
  */
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    @ApiOperation(value="회원정보 보기", notes = "회원정보 보기 API")
+    public ResponseEntity getMember() throws Exception{
+        MemberDto memberDto = authService.authMember();
+        return new ResponseEntity(new BaseResponse(memberDto.toString(),HttpStatus.OK),HttpStatus.OK);
+    }
 
+    @RequestMapping(value="", method = RequestMethod.DELETE)
+    @ApiOperation(value="회원 탈퇴", notes = "회원 탈퇴 API")
+    public ResponseEntity deleteMember(@RequestBody LoginDto loginDto, HttpSession httpSession) throws Exception{
+        return new ResponseEntity(memberService.deleteMember(loginDto, httpSession),HttpStatus.OK);
+    }
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @ApiOperation(value = "회원정보 수정", notes = "회원정보 수정 API")
+    public ResponseEntity updateMember(@RequestBody @Validated(ValidationGroups.join.class) MemberDto memberDto) throws Exception{
+        return new ResponseEntity(memberService.updateMember(memberDto),HttpStatus.OK);
+
+    }
 }

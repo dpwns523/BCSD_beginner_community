@@ -9,7 +9,6 @@ CREATE TABLE `COMMUNITY`.`MEMBERS`(
                                     `phone_number` VARCHAR(50) NOT NULL,
                                     `age` BIGINT(10) NOT NULL,
                                     `sex` BIGINT(1) NOT NULL,
-                                    `deleted` BOOLEAN NOT NULL DEFAULT FALSE,
                                     `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
                                     `created_at` TIMESTAMP NOT NULL DEFAULT NOW(),
                                     PRIMARY KEY (`id`))

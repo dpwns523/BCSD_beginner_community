@@ -5,4 +5,5 @@ import domain.dto.MemberDto;
 
 public interface AuthService {
     MemberDto authMember() throws MyException;
+    Object checkLogin() throws MyException;
 }

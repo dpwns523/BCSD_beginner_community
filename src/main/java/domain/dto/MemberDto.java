@@ -13,9 +13,8 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"password","deleted","updated_at"})
 public class MemberDto {
-
     @NotNull(groups={ValidationGroups.join.class}, message = "이름을 입력하세요.")
     @Size(min = 2, max = 10, groups={ValidationGroups.join.class}, message = "이름은 2글자 이상 8글자 이하입니다.")
     @Pattern(regexp = "^[a-zA-Z가-힣0-9]{2,10}$", groups = {ValidationGroups.join.class}, message = "이름에 특수문자 혹은 올바르지 않은 형태입니다.")
@@ -30,7 +29,7 @@ public class MemberDto {
     @NotNull(groups={ValidationGroups.join.class}, message = "별명을 입력하세요.")
     @Size(min = 1, max = 10, groups={ValidationGroups.join.class}, message = "별명은 1글자 이상 8글자 이하입니다.")
     @ApiModelProperty(example = "창조")
-    private String nick_name;
+    private String nickName;
 
     @NotNull(groups = {ValidationGroups.join.class}, message = "이메일은 공백일 수 없습니다.")
     @Email(groups = {ValidationGroups.join.class}, message = "올바른 이메일 형식이 아니거나 유효하지 않은 이메일입니다.")
@@ -49,30 +48,21 @@ public class MemberDto {
     @NotNull(groups={ValidationGroups.join.class}, message = "핸드폰 번호를 입력하세요.")
 //    @Pattern(regexp = "^01(?:0|1|[6-9]) - (?:\\d{3}|\\d{4}) - \\d{4}$",groups = {ValidationGroups.join.class},message = "휴대폰 번호 형식이 아닙니다")
     @ApiModelProperty(example = "010-6604-0868")
-    private String phone_number;
+    private String phoneNumber;
 
     @ApiModelProperty(hidden = true)
     private Long id;
     @ApiModelProperty(hidden = true)
-    private boolean deleted;
+    private Timestamp createdAt;
     @ApiModelProperty(hidden = true)
-    private Timestamp created_at;
-    @ApiModelProperty(hidden = true)
-    private Timestamp updated_at;
-    @ApiModelProperty(hidden = true)
-    private String session_key;
-    @ApiModelProperty(hidden = true)
-    private Timestamp session_limit;
-
-//    @ApiModelProperty(hidden = true)
-//    private String salt;
+    private Timestamp updatedAt;
 
     public MemberDto(String name, String password, String nickName, String email, String phoneNumber, int age, int sex){
         this.name= name;
         this.password = password;
-        this.nick_name = nickName;
+        this.nickName = nickName;
         this.email = email;
-        this.phone_number = phoneNumber;
+        this.phoneNumber = phoneNumber;
         this.age = age;
         this.sex = sex;
     }

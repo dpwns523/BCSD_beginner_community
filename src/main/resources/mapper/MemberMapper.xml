@@ -3,25 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="repository.MemberMapper">
-<!--  resultMap에서 property(dto의 변수명은 낙타표기법으로) DB table의 column명은 스네이크 표기법으로 변경하여 사용  -->
     <resultMap id="Member" type="domain.dto.MemberDto">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="password" column="password"/>
         <result property="email" column="email"/>
-        <result property="nick_name" column="nick_name"/>
-        <result property="phone_number" column="phone_number"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="phoneNumber" column="phone_number"/>
         <result property="age" column="age"/>
         <result property="sex" column="sex"/>
-        <result property="deleted" column="deleted"/>
-        <result property="updated_at" column="updated_at"/>
-        <result property="created_at" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="createdAt" column="created_at"/>
     </resultMap>
 
     <insert id = "join">
         INSERT INTO `members`(`name`, `password`, `email`, `nick_name`, `phone_number`, age, sex)
-        VALUES (#{memberDto.name}, #{memberDto.password}, #{memberDto.email}, #{memberDto.nick_name},
-                #{memberDto.phone_number}, #{memberDto.age}, #{memberDto.sex})
+        VALUES (#{memberDto.name}, #{memberDto.password}, #{memberDto.email}, #{memberDto.nickName},
+                #{memberDto.phoneNumber}, #{memberDto.age}, #{memberDto.sex})
     </insert>
     <select id="checkExistEmail" resultType="Boolean">
         SELECT EXISTS(
@@ -33,24 +31,30 @@
         SELECT EXISTS(
                        SELECT `id`
                        FROM `members`
-                       WHERE `nick_name` = #{nick_name});
+                       WHERE `nick_name` = #{nickName});
     </select>
+
     <select id="getUserInfoToEmail" resultMap="Member">
         SELECT *
         FROM `members`
         WHERE `email` = #{email};
     </select>
-    <select id="getUserInfoToSession" resultMap="Member">
-        SELECT *
-        FROM `members`
-        WHERE `session_key` = #{session};
-    </select>
-    <update id="setSession">
-        UPDATE members
-        SET session_key = #{session_key},
-            session_limit = #{limitDate}
-        WHERE email = #{email}
+
+    <update id="updateMember">
+        UPDATE `members`
+        SET `name` = #{memberDto.name},
+            `email` = #{memberDto.email},
+            `nick_name` = #{memberDto.nickName},
+            `phone_number` = #{memberDto.phoneNumber},
+            `age` = #{memberDto.age},
+            `sex` = #{memberDto.sex}
+        WHERE `id` = #{memberDto.id};
     </update>
+    <delete id="deleteMember">
+        DELETE
+        FROM `members`
+        WHERE `id` = #{id};
+    </delete>
 
 </mapper>
 

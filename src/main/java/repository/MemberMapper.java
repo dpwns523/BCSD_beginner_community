@@ -16,7 +16,7 @@ public interface MemberMapper {
         회원가입 시 중복 체크
      */
     boolean checkExistEmail(@Param(value = "email") String email);
-    boolean checkExistNickName(@Param(value ="nick_name")String nick_name);
+    boolean checkExistNickName(@Param(value ="nickName")String nickName);
     /*
         로그인 시 세션 관리
      */
@@ -25,8 +25,9 @@ public interface MemberMapper {
     void setSession(@Param(value="session_key") String sessionKey, @Param(value="limitDate") Date sessionLimit, @Param(value="email") String email);
 
     /*
-        회원 정보 수정
+        회원 정보 수정, 삭제
      */
-
+    void updateMember(@Param(value="memberDto")MemberDto memberDto);
+    void deleteMember(@Param(value="id")Long id);
 
 }
