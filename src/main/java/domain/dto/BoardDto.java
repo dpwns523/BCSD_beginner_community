@@ -26,8 +26,6 @@ public class BoardDto {
     @ApiModelProperty(hidden = true)
     private Long id;
     @ApiModelProperty(hidden = true)
-    private String nick_name;
-    @ApiModelProperty(hidden = true)
     private Long member_id;
     @ApiModelProperty(hidden = true)
     private Timestamp created_at;
@@ -36,9 +34,7 @@ public class BoardDto {
 
     @Override
     public String toString() {
-        return "{ name : "+
-                nick_name+
-                " title : "
+        return "{ title : "
                 +title
                 +" contents : "
                 +contents

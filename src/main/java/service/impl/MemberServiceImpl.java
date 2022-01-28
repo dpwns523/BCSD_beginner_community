@@ -53,8 +53,7 @@ public class MemberServiceImpl implements MemberService {
             throw new MyException(Constants.ExceptionClass.MEMBER, HttpStatus.BAD_REQUEST, "존재하지 않는 회원이거나, 이메일 혹은 비밀번호가 잘못되었습니다.");
 
         if(BCrypt.checkpw(loginDto.getPassword(), memberDto.getPassword())){
-            // 세션발급, 로그인 성공
-            // 로그인 성공 처리
+            // 로그인 성공
             return memberDto;
         }
         else throw new MyException(Constants.ExceptionClass.MEMBER, HttpStatus.BAD_REQUEST,"잘못된 비밀번호입니다.");

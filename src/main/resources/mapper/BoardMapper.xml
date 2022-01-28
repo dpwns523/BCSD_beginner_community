@@ -7,16 +7,14 @@
         <result property="id" column="id"/>
         <result property="member_id" column="member_id"/>
         <result property="title" column="title"/>
-        <result property="nick_name" column="nick_name"/>
         <result property="contents"  column="contents"/>
         <result property="updated_at" column="updated_at"/>
         <result property="created_at" column="created_at"/>
     </resultMap>
 
     <insert id="createBoard">
-        INSERT INTO `boards`(`member_id`, `title`, `nick_name`, `contents`)
-        VALUES (#{member_id}, #{boardDto.title}, #{nick_name},
-                #{boardDto.contents})
+        INSERT INTO `boards`(`member_id`, `title`, `contents`)
+        VALUES (#{member_id}, #{boardDto.title}, #{boardDto.contents})
     </insert>
 
     <select id="getBoardToId" resultMap="Board">

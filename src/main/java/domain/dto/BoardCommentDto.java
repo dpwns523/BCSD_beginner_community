@@ -15,8 +15,6 @@ import java.sql.Timestamp;
 public class BoardCommentDto {
     @NotNull(groups={ValidationGroups.board.class}, message = "게시판을 선택하세요.")
     private Long boardId;
-    @NotNull(groups={ValidationGroups.board.class}, message = "별명을 입력하세요.")
-    private String nickName;
     @NotNull(groups={ValidationGroups.board.class}, message = "내용을 입력하세요.")
     private String contents;
 
@@ -31,9 +29,7 @@ public class BoardCommentDto {
 
     @Override
     public String toString() {
-        return "{ name : "+
-                nickName+
-                " contents : "+
+        return "{ contents : "+
                 contents+
                 " }";
     }

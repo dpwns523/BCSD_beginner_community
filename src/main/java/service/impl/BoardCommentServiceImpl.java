@@ -37,7 +37,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
     public BaseResponse updateComment(Long commentId, BoardCommentDto boardCommentDto) throws MyException {
         MemberDto memberDto = authService.authMember();
         boardCommentDto.setId(commentId);
-        if(!memberDto.getNick_name().equals(boardCommentDto.getNickName()))
+        if(memberDto.getId() != boardCommentDto.getMemberId())
             throw new MyException(Constants.ExceptionClass.COMMENT,HttpStatus.BAD_REQUEST, "작성자만 수정할 수 있습니다.");
         boardCommentMapper.updateComment(boardCommentDto);
         return new BaseResponse("댓글이 수정되었습니다.", HttpStatus.OK);
@@ -47,7 +47,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
     public BaseResponse deleteComment(Long boardCommentId) throws Exception {
         MemberDto memberDto = authService.authMember();
         BoardCommentDto boardCommentDto = boardCommentMapper.getCommentToId(boardCommentId);
-        if(!memberDto.getNick_name().equals(boardCommentDto.getNickName()))
+        if(memberDto.getId() != boardCommentDto.getMemberId())
             throw new MyException(Constants.ExceptionClass.COMMENT,HttpStatus.BAD_REQUEST, "작성자만 삭제할 수 있습니다.");
         boardCommentMapper.deleteComment(boardCommentId);
         return new BaseResponse("댓글이 삭제되었습니다.", HttpStatus.OK);

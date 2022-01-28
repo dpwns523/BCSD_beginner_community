@@ -25,7 +25,7 @@ public class BoardServiceImpl implements BoardService {
     public BaseResponse createBoard(BoardDto board) throws Exception {
         // 로그인 검증
         MemberDto memberDto = authService.authMember();
-        boardMapper.createBoard(memberDto.getId(), memberDto.getNick_name(), board);
+        boardMapper.createBoard(memberDto.getId(), board);
         return new BaseResponse("게시글 등록", HttpStatus.OK);
     }
 
@@ -41,8 +41,7 @@ public class BoardServiceImpl implements BoardService {
     public BaseResponse updateBoard(Long boardId, String title, String contents) throws MyException {
         MemberDto memberDto = authService.authMember();
         BoardDto boardDto = boardMapper.getBoardToId(boardId);
-        System.out.println(memberDto.getNick_name() + boardDto.getNick_name());
-        if(!memberDto.getNick_name().equals(boardDto.getNick_name())) throw new MyException(Constants.ExceptionClass.BOARD, HttpStatus.BAD_REQUEST, "작성자만 수정할 수 있습니다.");
+        if(memberDto.getId() != boardDto.getMember_id()) throw new MyException(Constants.ExceptionClass.BOARD, HttpStatus.BAD_REQUEST, "작성자만 수정할 수 있습니다.");
         boardMapper.updateBoard(boardId, title, contents);
         return new BaseResponse("게시글이 수정 되었습니다.",HttpStatus.OK);
     }
@@ -51,7 +50,7 @@ public class BoardServiceImpl implements BoardService {
     public BaseResponse deleteBoard(Long boardId) throws MyException {
         MemberDto memberDto = authService.authMember();
         BoardDto boardDto = boardMapper.getBoardToId(boardId);
-        if(!memberDto.getNick_name().equals(boardDto.getNick_name())) throw new MyException(Constants.ExceptionClass.BOARD, HttpStatus.BAD_REQUEST, "작성자만 삭제할 수 있습니다.");
+        if(memberDto.getId() != boardDto.getMember_id()) throw new MyException(Constants.ExceptionClass.BOARD, HttpStatus.BAD_REQUEST, "작성자만 삭제할 수 있습니다.");
         boardMapper.deleteBoard(boardId);
         return new BaseResponse("게시글이 삭제 되었습니다.", HttpStatus.OK);
     }
