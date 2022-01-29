@@ -12,6 +12,8 @@ public interface BoardService {
 
     BaseResponse updateBoard(Long boardId, String title, String contents) throws Exception;
 
-    BaseResponse deleteBoard(Long id) throws Exception;
+    BaseResponse deleteBoard(Long boardId) throws Exception;
+
+    BaseResponse getComments(Long boardId) throws Exception;
 
 }

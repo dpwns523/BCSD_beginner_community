@@ -29,5 +29,4 @@ public interface MemberMapper {
      */
     void updateMember(@Param(value="memberDto")MemberDto memberDto);
     void deleteMember(@Param(value="id")Long id);
-
 }

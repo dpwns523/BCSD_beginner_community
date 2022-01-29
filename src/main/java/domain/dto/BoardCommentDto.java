@@ -26,7 +26,10 @@ public class BoardCommentDto {
     private Timestamp createdAt;
     @ApiModelProperty(hidden=true)
     private Timestamp updatedAt;
-
+    /*
+        TODO : 댓글 작성자의 닉네임을 contents와 같이 출력하고자 함.
+         memberId로 DB를 다시 접근 vs sql의 join활용
+     */
     @Override
     public String toString() {
         return "{ contents : "+

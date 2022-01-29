@@ -26,9 +26,6 @@ public class BoardCommentController {
         return new ResponseEntity(boardCommentService.createComment(boardCommentDto), HttpStatus.OK);
     }
 
-    /*
-        RequestMethod.PUT에서 @RequestBody 사용시 안되는 이유?
-     */
     @RequestMapping(value = "",method = RequestMethod.PUT)
     @ApiOperation(value = "댓글 수정", notes = "댓글 수정 API")
     public ResponseEntity updateComment(Long commentId, BoardCommentDto boardCommentDto) throws Exception{
@@ -41,11 +38,6 @@ public class BoardCommentController {
         return new ResponseEntity(boardCommentService.deleteComment(boardCommentId),HttpStatus.OK);
     }
 
-//    @RequestMapping(value = "", method = RequestMethod.GET)
-//    @ApiOperation(value = "게시글 내 댓글 불러오기", notes = "게시글 내 댓글 불러오기")
-//    public ResponseEntity getComments(Long boardId) throws Exception{
-//        return new ResponseEntity(boardCommentService.getComments(boardId),HttpStatus.OK);
-//    }
     /*
         자기가 쓴 댓글들 보기 및 쓴 댓글의 게시판 제목 보기
      */

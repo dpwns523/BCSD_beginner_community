@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,8 +17,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class BoardDto {
     /*
-        board_hit - 조회수
-        comments - 댓글 수 추가
+        TODO : board_hit - 조회수 추가
      */
     @NotNull(groups={ValidationGroups.board.class}, message = "제목을 입력하세요.")
     private String title;
@@ -31,6 +31,8 @@ public class BoardDto {
     private Timestamp created_at;
     @ApiModelProperty(hidden = true)
     private Timestamp updated_at;
+    @ApiModelProperty(hidden = true)
+    private List<BoardCommentDto> comments;
 
     @Override
     public String toString() {

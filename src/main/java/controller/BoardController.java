@@ -46,4 +46,11 @@ public class BoardController {
     /*
         게시글 목록 불러오기 -페이징
      */
+
+    @RequestMapping(value="comments", method = RequestMethod.GET)
+    @ApiOperation(value="게시글 댓글 불러오기", notes = "게시글 댓글 불러오기 API")
+    public ResponseEntity readComments(Long boardId) throws Exception{
+        return new ResponseEntity(boardService.getComments(boardId),HttpStatus.OK);
+    }
+
 }

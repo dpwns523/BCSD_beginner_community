@@ -2,6 +2,7 @@ package service.impl;
 
 import common.Constants;
 import common.exception.MyException;
+import domain.dto.BoardCommentDto;
 import domain.dto.BoardDto;
 import domain.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import repository.BoardMapper;
 import response.BaseResponse;
 import service.AuthService;
 import service.BoardService;
+
+import java.util.List;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -55,4 +58,9 @@ public class BoardServiceImpl implements BoardService {
         return new BaseResponse("게시글이 삭제 되었습니다.", HttpStatus.OK);
     }
 
+    @Override
+    public BaseResponse getComments(Long boardId) throws Exception {
+        List<BoardCommentDto> boardCommentDto = boardMapper.getComments(boardId);
+        return new BaseResponse(boardCommentDto.toString(), HttpStatus.OK);
+    }
 }
