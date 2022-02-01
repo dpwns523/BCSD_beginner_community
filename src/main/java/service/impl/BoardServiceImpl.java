@@ -2,8 +2,8 @@ package service.impl;
 
 import common.Constants;
 import common.exception.MyException;
-import domain.dto.BoardCommentDto;
 import domain.dto.BoardDto;
+import domain.dto.BoardPaginationDto;
 import domain.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +12,6 @@ import repository.BoardMapper;
 import response.BaseResponse;
 import service.AuthService;
 import service.BoardService;
-
-import java.util.List;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -60,7 +58,16 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BaseResponse getComments(Long boardId) throws Exception {
-        List<BoardCommentDto> boardCommentDto = boardMapper.getComments(boardId);
-        return new BaseResponse(boardCommentDto.toString(), HttpStatus.OK);
+        BoardDto boardDto = boardMapper.getBoardToId(boardId);
+        boardDto.setComments(boardMapper.getComments(boardId));
+        return new BaseResponse(boardDto.getComments().toString(), HttpStatus.OK);
+    }
+
+    @Override
+    public BaseResponse getBoardList(int page) throws Exception {
+        BoardPaginationDto boardPaginationDto = new BoardPaginationDto();
+        boardPaginationDto.setPageInfo(page, boardMapper.getBoardCnt());
+        boardPaginationDto.setBoardList(boardMapper.getBoardList(boardPaginationDto.getStart(),boardPaginationDto.getRange()));
+        return new BaseResponse(boardPaginationDto.getBoardList().toString(), HttpStatus.OK);
     }
 }

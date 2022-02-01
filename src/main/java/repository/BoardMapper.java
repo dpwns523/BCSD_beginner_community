@@ -16,6 +16,14 @@ public interface BoardMapper {
     BoardDto getBoardToId(@Param(value="id")Long boardId);
     void updateBoard(@Param(value = "id")Long boardId, @Param(value="title")String title,@Param(value="contents")String contents);
     void deleteBoard(@Param(value = "id")Long boardId);
+    /*
+        게시글 pagination
+     */
+    int getBoardCnt();
+    List<BoardDto> getBoardList(@Param(value="start")int start, @Param(value="range")int range);
+    /*
+        댓글 불러오기
+     */
     List<BoardCommentDto> getComments(@Param(value = "board_id")Long boardId);
 
 

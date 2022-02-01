@@ -12,8 +12,6 @@ import response.BaseResponse;
 import service.AuthService;
 import service.BoardCommentService;
 
-import java.util.List;
-
 @Service
 public class BoardCommentServiceImpl implements BoardCommentService {
 
@@ -53,11 +51,4 @@ public class BoardCommentServiceImpl implements BoardCommentService {
         return new BaseResponse("댓글이 삭제되었습니다.", HttpStatus.OK);
     }
 
-    @Override
-    public List<BoardCommentDto> getComments(Long boardId) throws Exception {
-        /*
-            하나의 게시글에 달린 댓글들
-         */
-        return null;
-    }
 }

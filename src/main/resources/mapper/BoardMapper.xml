@@ -22,6 +22,10 @@
         <result property="updatedAt" column="updated_at"/>
     </resultMap>
 
+    <resultMap id="BoardList" type="domain.dto.BoardPaginationDto">
+        <collection property="boardList" column="" javaType="java.util.ArrayList"  ofType="domain.dto.BoardDto" select="getBoardList"/>
+    </resultMap>
+
     <insert id="createBoard">
         INSERT INTO `boards`(`member_id`, `title`, `contents`)
         VALUES (#{member_id}, #{boardDto.title}, #{boardDto.contents})
@@ -39,15 +43,30 @@
             `contents` = #{contents}
         WHERE `id` = #{id};
     </update>
+
     <delete id="deleteBoard">
         DELETE
         FROM `boards`
         WHERE `id` = #{id};
     </delete>
-    <select id="getComments" resultType="domain.dto.BoardCommentDto" resultMap="BoardComments">
+
+    <select id="getComments" resultMap="BoardComments">
         SELECT *
         FROM `comments`
         WHERE `board_id` = #{board_id};
     </select>
+
+    <select id="getBoardList" resultMap="Board">
+        SELECT *
+        FROM `boards`
+            ORDER BY `created_at` DESC
+        LIMIT #{start}, #{range};
+    </select>
+
+    <select id="getBoardCnt" resultType="int">
+        SELECT count(*)
+        FROM `boards`
+    </select>
+
 
 </mapper>

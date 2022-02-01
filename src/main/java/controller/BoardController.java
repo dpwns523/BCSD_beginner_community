@@ -26,7 +26,7 @@ public class BoardController {
         return new ResponseEntity(boardService.createBoard(boardDto), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "",method = RequestMethod.GET)
+    @RequestMapping(value = "/{boardId}",method = RequestMethod.GET)
     @ApiOperation(value = "게시글 보기", notes = "게시글 보기 API")
     public ResponseEntity getBoard(Long boardId) throws Exception{
         return new ResponseEntity(boardService.getBoard(boardId),HttpStatus.OK);
@@ -43,9 +43,12 @@ public class BoardController {
     public ResponseEntity deleteBoard(@RequestBody Long boardId) throws Exception{
         return new ResponseEntity(boardService.deleteBoard(boardId),HttpStatus.OK);
     }
-    /*
-        게시글 목록 불러오기 -페이징
-     */
+
+    @RequestMapping(value="", method = RequestMethod.GET)
+    @ApiOperation(value="게시글 목록 보기", notes="게시글 목록 API")
+    public ResponseEntity getBoardList(int page) throws Exception{
+        return new ResponseEntity(boardService.getBoardList(page), HttpStatus.OK);
+    }
 
     @RequestMapping(value="comments", method = RequestMethod.GET)
     @ApiOperation(value="게시글 댓글 불러오기", notes = "게시글 댓글 불러오기 API")
