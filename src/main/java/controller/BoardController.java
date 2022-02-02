@@ -56,4 +56,14 @@ public class BoardController {
         return new ResponseEntity(boardService.getComments(boardId),HttpStatus.OK);
     }
 
+    @RequestMapping(value="search/{title}", method = RequestMethod.GET)
+    @ApiOperation(value = "게시글 제목으로 검색", notes = "게시글 제목으로 검색 API")
+    public ResponseEntity searchBoardToTitle(int page, String title) throws Exception{
+        return new ResponseEntity(boardService.searchBoardToTitle(page, title), HttpStatus.OK);
+    }
+    @RequestMapping(value="search/{contents}", method = RequestMethod.GET)
+    @ApiOperation(value = "게시글 내용으로 검색", notes = "게시글 내용으로 검색 API")
+    public ResponseEntity searchBoardToContents(int page, String contents) throws Exception{
+        return new ResponseEntity(boardService.searchBoardToTitle(page, contents), HttpStatus.OK);
+    }
 }

@@ -70,4 +70,20 @@ public class BoardServiceImpl implements BoardService {
         boardPaginationDto.setBoardList(boardMapper.getBoardList(boardPaginationDto.getStart(),boardPaginationDto.getRange()));
         return new BaseResponse(boardPaginationDto.getBoardList().toString(), HttpStatus.OK);
     }
+
+    @Override
+    public BaseResponse searchBoardToTitle(int page, String title) throws Exception {
+        BoardPaginationDto boardPaginationDto = new BoardPaginationDto();
+        boardPaginationDto.setPageInfo(page, boardMapper.countBoardToTitle(title));
+        boardPaginationDto.setBoardList(boardMapper.searchToTitle(title, boardPaginationDto.getStart(),boardPaginationDto.getRange()));
+        return new BaseResponse(boardPaginationDto.getBoardList().toString(), HttpStatus.OK);
+    }
+
+    @Override
+    public BaseResponse searchBoardToContents(int page, String contents) throws Exception {
+        BoardPaginationDto boardPaginationDto = new BoardPaginationDto();
+        boardPaginationDto.setPageInfo(page, boardMapper.countBoardToTitle(contents));
+        boardPaginationDto.setBoardList(boardMapper.searchToContents(contents, boardPaginationDto.getStart(),boardPaginationDto.getRange()));
+        return new BaseResponse(boardPaginationDto.getBoardList().toString(), HttpStatus.OK);
+    }
 }

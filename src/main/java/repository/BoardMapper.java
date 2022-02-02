@@ -25,6 +25,15 @@ public interface BoardMapper {
         댓글 불러오기
      */
     List<BoardCommentDto> getComments(@Param(value = "board_id")Long boardId);
+    /*
+        게시글 검색
+        TODO: 작성자 닉네임을 통한 게시글 검색
+     */
+    int countBoardToTitle(@Param(value = "title")String title);
+    int countBoardToContents(@Param(value = "contents")String contents);
+    List<BoardDto> searchToTitle(@Param(value ="title")String title, @Param(value="start")int start, @Param(value="range")int range);
+    List<BoardDto> searchToContents(@Param(value ="contents")String contents, @Param(value="start")int start, @Param(value="range")int range);
+
 
 
 }
