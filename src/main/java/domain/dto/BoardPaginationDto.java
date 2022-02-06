@@ -33,7 +33,7 @@ public class BoardPaginationDto {
     public void setPageInfo(int page, int listCnt) throws MyException {
         this.page = page;
         this.listCnt = listCnt;
-        this.pageCnt = (int) Math.ceil(listCnt/range);
+        this.pageCnt = (int) Math.ceil((double)listCnt/range);
         this.start = (this.page-1)*range;
         this.end = (this.page*range) -1;
 

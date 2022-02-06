@@ -75,6 +75,7 @@ public class BoardServiceImpl implements BoardService {
     public BaseResponse searchBoardToTitle(int page, String title) throws Exception {
         BoardPaginationDto boardPaginationDto = new BoardPaginationDto();
         boardPaginationDto.setPageInfo(page, boardMapper.countBoardToTitle(title));
+        System.out.println("title: "+title+"start: "+boardPaginationDto.getStart()+"range: "+boardPaginationDto.getRange());
         boardPaginationDto.setBoardList(boardMapper.searchToTitle(title, boardPaginationDto.getStart(),boardPaginationDto.getRange()));
         return new BaseResponse(boardPaginationDto.getBoardList().toString(), HttpStatus.OK);
     }

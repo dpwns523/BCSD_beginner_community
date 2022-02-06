@@ -76,14 +76,14 @@
             ORDER BY `created_at` DESC
         <include refid="limit"/>;
     </select>
-    
-<!--  페이징을 위한 검색 시 게시글 개수얻기  -->
-    <select id="countBoardToTitle" resultMap="int">
+
+    <!--  페이징을 위한 검색 시 게시글 개수얻기  -->
+    <select id="countBoardToTitle" resultType="int">
         <include refid="count"/>
         WHERE title REGEXP #{title};
     </select>
 
-    <select id="countBoardToContents" resultMap="int">
+    <select id="countBoardToContents" resultType="int">
         <include refid="count"/>
         WHERE contents REGEXP #{contents};
     </select>
@@ -91,17 +91,16 @@
     <sql id="select">
         SELECT * FROM `boards`
     </sql>
-<!--  게시글 얻기 -->
+    <!--  게시글 얻기 -->
     <select id="searchToTitle" resultMap="Board">
         <include refid="select"/>
-        WHERE title REGEXP #{title};
+        WHERE title REGEXP #{title}
         <include refid="limit"/>;
     </select>
     <select id="searchToContents" resultMap="Board">
         <include refid="select"/>
-        WHERE contents REGEXP #{contents};
+        WHERE contents REGEXP #{contents}
         <include refid="limit"/>;
     </select>
-
 
 </mapper>
