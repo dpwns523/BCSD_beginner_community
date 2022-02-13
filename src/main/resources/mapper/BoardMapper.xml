@@ -95,11 +95,13 @@
     <select id="searchToTitle" resultMap="Board">
         <include refid="select"/>
         WHERE title REGEXP #{title}
+            ORDER BY `created_at` DESC
         <include refid="limit"/>;
     </select>
     <select id="searchToContents" resultMap="Board">
         <include refid="select"/>
         WHERE contents REGEXP #{contents}
+            ORDER BY `created_at` DESC
         <include refid="limit"/>;
     </select>
 
