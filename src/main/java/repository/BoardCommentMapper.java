@@ -13,4 +13,5 @@ public interface BoardCommentMapper {
     void updateComment(@Param(value = "commentDto")BoardCommentDto boardCommentDto);
     BoardCommentDto getCommentToId(@Param(value ="id")Long commentId);
     void deleteComment(@Param(value="id")Long commentId);
+    void deleteCommentsToMemberId(@Param(value="memberId")Long memberId);
 }

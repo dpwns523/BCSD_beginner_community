@@ -8,6 +8,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import repository.BoardCommentMapper;
+import repository.BoardMapper;
 import repository.MemberMapper;
 import response.BaseResponse;
 import service.AuthService;
@@ -27,6 +29,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private BoardMapper boardMapper;
+
+    @Autowired
+    private BoardCommentMapper boardCommentMapper;
 
     @Override
     public BaseResponse join(MemberDto memberDto) throws MyException{
@@ -90,6 +98,8 @@ public class MemberServiceImpl implements MemberService {
         httpSession.removeAttribute("login");
         httpSession.invalidate();
         // 탈퇴 시 작성한 게시글, 댓글 모두 삭제
+        boardMapper.deleteBoardToMemberId(memberDto.getId());
+        boardCommentMapper.deleteCommentsToMemberId(memberDto.getId());
         return new BaseResponse("회원 탈퇴 완료", HttpStatus.OK);
     }
 

@@ -32,4 +32,10 @@
         FROM `comments`
         WHERE `id` = #{id};
     </delete>
+    <delete id="deleteCommentsToMemberId">
+        DELETE
+        FROM `comments`
+        WHERE `member_id` = #{memberId};
+    </delete>
+
 </mapper>

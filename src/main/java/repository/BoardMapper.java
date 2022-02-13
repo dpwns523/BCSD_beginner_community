@@ -16,6 +16,7 @@ public interface BoardMapper {
     BoardDto getBoardToId(@Param(value="id")Long boardId);
     void updateBoard(@Param(value = "id")Long boardId, @Param(value="title")String title,@Param(value="contents")String contents);
     void deleteBoard(@Param(value = "id")Long boardId);
+    void deleteBoardToMemberId(@Param(value="memberId")Long memberId);
     /*
         게시글 pagination
      */
@@ -33,7 +34,5 @@ public interface BoardMapper {
     int countBoardToContents(@Param(value = "contents")String contents);
     List<BoardDto> searchToTitle(@Param(value ="title")String title, @Param(value="start")int start, @Param(value="range")int range);
     List<BoardDto> searchToContents(@Param(value ="contents")String contents, @Param(value="start")int start, @Param(value="range")int range);
-
-
 
 }
