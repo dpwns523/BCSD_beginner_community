@@ -27,4 +27,6 @@ INSERT INTO `members`(`name`, `password`, `email`, `nick_name`, `phone_number`, 
 VALUES ("임예준", "password", "dpwns523@koreatech.ac.kr", "창조3",
         "01066040868",25, 1);
 
+-- 테이블 수정 사항
+ALTER TABLE `members` ADD UNIQUE(nick_name), ADD UNIQUE(email);
 

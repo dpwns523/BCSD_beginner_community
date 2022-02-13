@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public BaseResponse updateMember(MemberDto memberDto) throws Exception {
+    public BaseResponse updateMember(MemberDto memberDto, HttpSession httpSession) throws Exception {
         // 로그인한 상태에서만 본인 정보를 업데이트
         MemberDto memberDto1 = authService.authMember();
         if (memberDto1.getEmail().equals(memberDto.getEmail())){
@@ -74,6 +74,9 @@ public class MemberServiceImpl implements MemberService {
         }
         memberDto.setId(memberDto1.getId());
         memberMapper.updateMember(memberDto);
+        // 회원 정보 수정 시 로그아웃 -> 변경사항 적용을 위해 재 로그인
+        httpSession.removeAttribute("login");
+        httpSession.invalidate();
         return new BaseResponse("회원정보 수정 완료", HttpStatus.OK);
     }
 

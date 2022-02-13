@@ -85,8 +85,8 @@ public class MemberController {
     }
     @RequestMapping(value = "", method = RequestMethod.PUT)
     @ApiOperation(value = "회원정보 수정", notes = "회원정보 수정 API")
-    public ResponseEntity updateMember(@RequestBody @Validated(ValidationGroups.join.class) MemberDto memberDto) throws Exception{
-        return new ResponseEntity(memberService.updateMember(memberDto),HttpStatus.OK);
+    public ResponseEntity updateMember(@RequestBody @Validated(ValidationGroups.join.class) MemberDto memberDto, HttpSession httpSession) throws Exception{
+        return new ResponseEntity(memberService.updateMember(memberDto, httpSession),HttpStatus.OK);
 
     }
 }
