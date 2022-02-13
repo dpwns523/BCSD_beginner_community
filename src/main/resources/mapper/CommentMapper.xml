@@ -12,14 +12,20 @@
         <result property="createdAt" column="created_at"/>
     </resultMap>
     <insert id="createComment">
-        INSERT INTO `comments`(`board_id`, `nick_name` , `member_id`, `contents`)
-        VALUES (#{commentDto.boardId}, "창조1", #{commentDto.memberId}, #{commentDto.contents})
+        INSERT INTO `comments`(`board_id`, `member_id`, `contents`)
+        VALUES (#{commentDto.boardId}, #{commentDto.memberId}, #{commentDto.contents})
     </insert>
 
     <select id="getCommentToId" resultMap="Comment">
         SELECT *
         FROM `comments`
         WHERE `id` = #{id};
+    </select>
+
+    <select id="getMemberIdToId" resultType="Long">
+        SELECT `member_id`
+        FROM `comments`
+        WHERE `id` = #{commentId}
     </select>
 
     <update id="updateComment">

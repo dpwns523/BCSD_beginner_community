@@ -35,8 +35,9 @@ public class BoardCommentServiceImpl implements BoardCommentService {
     public BaseResponse updateComment(Long commentId, BoardCommentDto boardCommentDto) throws MyException {
         MemberDto memberDto = authService.authMember();
         boardCommentDto.setId(commentId);
+        boardCommentDto.setMemberId(boardCommentMapper.getMemberIdToId(commentId));
         if(memberDto.getId() != boardCommentDto.getMemberId())
-            throw new MyException(Constants.ExceptionClass.COMMENT,HttpStatus.BAD_REQUEST, "작성자만 수정할 수 있습니다.");
+            throw new MyException(Constants.ExceptionClass.COMMENT, HttpStatus.BAD_REQUEST, "작성자만 수정할 수 있습니다.");
         boardCommentMapper.updateComment(boardCommentDto);
         return new BaseResponse("댓글이 수정되었습니다.", HttpStatus.OK);
     }
