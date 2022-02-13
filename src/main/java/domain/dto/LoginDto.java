@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LoginDto {
-    @ApiModelProperty(example = "dpwns523@naver.com")
+    @ApiModelProperty(example = "dpwns523@koreatech.ac.kr")
     private String email;
 
     @ApiModelProperty(example = "password")

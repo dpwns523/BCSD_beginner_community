@@ -89,6 +89,7 @@ public class MemberServiceImpl implements MemberService {
         // 탈퇴 시 로그아웃
         httpSession.removeAttribute("login");
         httpSession.invalidate();
+        // 탈퇴 시 작성한 게시글, 댓글 모두 삭제
         return new BaseResponse("회원 탈퇴 완료", HttpStatus.OK);
     }
 
