@@ -15,8 +15,8 @@ import response.BaseResponse;
 import service.AuthService;
 import service.MemberService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 /*
     회원가입, 로그인 세션
  */
@@ -29,6 +29,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private HttpServletRequest request;
 
     @Autowired
     private BoardMapper boardMapper;
@@ -49,21 +52,33 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberDto login(LoginDto loginDto) throws MyException {
+    public BaseResponse login(LoginDto loginDto) throws MyException {
         if(authService.checkLogin() != null)
             throw new MyException(Constants.ExceptionClass.MEMBER, HttpStatus.BAD_REQUEST, "이미 로그인 되어있습니다. 로그아웃을 먼저 해주세요");
         // 비밀번호는 암호화 처리를 했으므로 따로 검증처리함.
         MemberDto memberDto = memberMapper.getUserInfoToEmail(loginDto.getEmail());
 
-        if(memberDto == null || memberDto.getPassword() == null || memberDto.getEmail() == null)
-            throw new MyException(Constants.ExceptionClass.MEMBER, HttpStatus.BAD_REQUEST, "존재하지 않는 회원이거나, 이메일 혹은 비밀번호가 잘못되었습니다.");
+        if(memberDto == null || memberDto.getEmail() == null)
+            throw new MyException(Constants.ExceptionClass.MEMBER, HttpStatus.BAD_REQUEST, "존재하지 않는 회원이거나, 이메일이 잘못되었습니다.");
 
         if(BCrypt.checkpw(loginDto.getPassword(), memberDto.getPassword())){
             // 로그인 성공
-            return memberDto;
+            HttpSession httpSession = request.getSession();
+            httpSession.setAttribute("login",memberDto);
+            return new BaseResponse("로그인 성공, 세션 발급",HttpStatus.OK);
         }
         else throw new MyException(Constants.ExceptionClass.MEMBER, HttpStatus.BAD_REQUEST,"잘못된 비밀번호입니다.");
     }
+
+    @Override
+    public BaseResponse logout() throws Exception {
+        authService.authMember();
+        HttpSession httpSession = request.getSession();
+        httpSession.removeAttribute("login");
+        httpSession.invalidate();
+        return new BaseResponse("로그아웃 및 세션 삭제", HttpStatus.OK);
+    }
+
     @Override
     public MemberDto getMember(String email) {
         return memberMapper.getUserInfoToEmail(email);
@@ -114,9 +129,4 @@ public class MemberServiceImpl implements MemberService {
             throw new MyException(Constants.ExceptionClass.MEMBER, HttpStatus.BAD_REQUEST, "닉네임 중복");
     }
 
-    // 로그인 유지
-    @Override
-    public void keepLogin(String email, String sessionId, Date limitDate) throws Exception {
-        memberMapper.setSession(sessionId,limitDate,email);
-    }
 }

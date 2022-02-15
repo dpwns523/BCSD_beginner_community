@@ -49,7 +49,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 int amount = 60 * 60 * 24;
                 loginCookie.setMaxAge(amount);    // 기간 하루
                 Date sessionLimit = new Date(System.currentTimeMillis()+(1000*amount));
-                memberService.keepLogin(memberDto.getEmail(), httpSession.getId(), sessionLimit);
+//                memberService.keepLogin(memberDto.getEmail(), httpSession.getId(), sessionLimit);
                 // 전송
                 response.addCookie(loginCookie);
             }
